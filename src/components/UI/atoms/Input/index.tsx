@@ -7,7 +7,7 @@ export interface InputProps extends React.TextareaHTMLAttributes<HTMLTextAreaEle
   type?: InputType;
 }
 
-export default function Input({ value, type = "default", ...props }: InputProps) {
+export default function Input({ type = "default", ...props }: InputProps) {
   return (
     <textarea className={`input ${type}`} {...props}/>
   )
