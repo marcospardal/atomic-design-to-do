@@ -4,9 +4,16 @@ import { FormField, FormFooter } from '../../molecules';
 import Task from '@/types/Task.types';
 import { useToDoContext } from '../../../../hooks';
 
+const emptyTask: Task = {
+  description: '',
+  id: 0,
+  isCompleted: false,
+  title: ''
+}
+
 export default function Form() {
-  const { formValues, onSubmit, resetInitialValues } = useToDoContext();
-  const [task, setTask] = useState<Task>(formValues);
+  const { todos, currentId, onSubmit, changeCurrentId } = useToDoContext();
+  const [task, setTask] = useState<Task>(emptyTask);
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTask(prev => ({
@@ -16,7 +23,15 @@ export default function Form() {
 
   }, []);
 
-  useEffect(() => setTask(formValues), [formValues]);
+  useEffect(() => {
+    if (currentId === -1) {
+      setTask(emptyTask);
+      return;
+    }
+
+    const editTodo = todos.find(todo => todo.id === currentId);
+    editTodo && setTask(editTodo);
+  }, [currentId]);
 
   return (
     <section id='task-form' className='form'>
@@ -38,12 +53,15 @@ export default function Form() {
       <FormFooter options={[
         {
           text: 'Cancel',
-          onClick: () => resetInitialValues,
+          onClick: () => changeCurrentId(-1),
           type: 'secondary'
         },
         {
           text: 'Save',
-          onClick: () => onSubmit(task),
+          onClick: () => {
+            onSubmit(task);
+            setTask(emptyTask);
+          },
           type: 'primary'
         }
       ]} />

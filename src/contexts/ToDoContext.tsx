@@ -8,34 +8,20 @@ interface TodoProviderProps {
   children: ReactNode;
 }
 
-const emptyTask: Task = {
-  description: '',
-  id: 0,
-  isCompleted: false,
-  title: ''
-};
-
 export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
-  const [formValues, setFormValues] = useState<Task>(emptyTask);
+  const [currentId, setCurrentId] = useState<number>(-1);
   const [todos, setTodos] = useState<Task[]>([]);
 
   const onSubmit = useCallback((todo: Task) => {
     setTodos(prev => [...prev, {...todo, id: todos.length}]);
-    setFormValues(emptyTask);
   }, [todos]);
 
   const finishToDo = useCallback((toDoId: number) => {
     setTodos(prev => prev.map(item => item.id === toDoId ? { ...item, isCompleted: true } : item));
   }, []);
 
-  const setInitialValues = useCallback((toDoId: number) => {
-    const index = todos.findIndex(e => e.id === toDoId);
-
-    index !== -1 && setFormValues(todos[index]);
-  }, [todos]);
-
-  const resetInitialValues = useCallback(() => {
-    setFormValues(emptyTask);
+  const changeCurrentId = useCallback((toDoId: number) => {
+    setCurrentId(toDoId);
   }, []);
 
   useEffect(() => {
@@ -52,7 +38,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
   }, [])
 
   return (
-    <TodoContext.Provider value={{ todos, formValues, onSubmit, finishToDo, setInitialValues, resetInitialValues }}>
+    <TodoContext.Provider value={{ todos, currentId, onSubmit, finishToDo, changeCurrentId }}>
       {children}
     </TodoContext.Provider>
   );
