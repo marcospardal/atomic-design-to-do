@@ -1,0 +1,9 @@
+.form {
+  background-color: var(--card);
+  gap: 15px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
