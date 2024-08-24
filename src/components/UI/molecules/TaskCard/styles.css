@@ -1,0 +1,17 @@
+.task-card {
+  max-width: 100%;
+  background-color: var(--card);
+  display: flex;
+  padding: 10px 15px;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  cursor: pointer;
+}
