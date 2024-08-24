@@ -1,0 +1,26 @@
+@import '../../../../colors.css';
+
+.button {
+  border-radius: 10px;
+  cursor: pointer;
+  border-style: none;
+  font-family: "Roboto Condensed";
+  font-size: 18px;
+  padding: 5px 15px;
+  transition: transform 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.primary {
+  background: var(--primary);
+  color: var(--background-color);
+}
+
+.secondary {
+  background-color: var(--background-color);
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+}

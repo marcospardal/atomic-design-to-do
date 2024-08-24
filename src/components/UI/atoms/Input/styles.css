@@ -1,0 +1,22 @@
+@import '../../../../colors.css';
+
+.input {
+  border: 1px solid var(--background-color);
+  outline: none;
+  border-radius: 8px;
+  padding: 0 5px;
+  font-family: "Roboto Condensed";
+  font-size: 18px;
+  resize: none;
+  background: var(--background-color);
+  padding: 0 8px;
+  line-height: 28px;
+}
+
+.default {
+  height: 28px;
+}
+
+.textarea {
+  height: 85px;
+}

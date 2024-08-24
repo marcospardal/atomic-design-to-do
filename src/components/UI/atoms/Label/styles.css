@@ -1,0 +1,8 @@
+label {
+  align-self: self-start;
+  font-family: "Roboto Condensed";
+  color: var(--label);
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: bold;
+}
