@@ -5,6 +5,12 @@
   padding: 10px 15px;
   border-radius: 10px;
   flex-direction: column;
+  transition: 0.2s ease-in-out;
+}
+
+.task-card.fade-out {
+  opacity: 0;
+  transform: scale(0.5);
 }
 
 .task-card-header {
@@ -14,4 +20,5 @@
 
 input {
   cursor: pointer;
+  border: 1px solid var(--background-color);
 }
