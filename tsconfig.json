@@ -21,9 +21,11 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@atoms": ["./src/components/UI/atoms/*"],
-      "@molecules": ["./src/components/UI/molecules/*"],
-      "@organisms": ["./src/components/UI/organisms/*"],
+      "@atoms/*": ["./src/components/UI/atoms/*"],
+      "@molecules/*": ["./src/components/UI/molecules/*"],
+      "@organisms/*": ["./src/components/UI/organisms/*"],
+      "@icons/*": ["./src/static/icons/*"],
+      "@hooks/*": ["./src/hooks/*"]
     },
   },
   "include": [
