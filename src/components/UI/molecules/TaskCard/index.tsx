@@ -1,5 +1,5 @@
 import Task from '@/types/Task.types';
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useRef } from 'react';
 import { Button, Label, Info } from '@atoms/index';
 import { useToDoContext } from '@hooks/index';
 
@@ -9,11 +9,11 @@ import './styles.css';
 
 interface TaskCardProps extends Task { }
 
-export default function TaskCard({ id, title, description, isCompleted }: TaskCardProps) {
+export default memo(function TaskCard({ id, title, description, isCompleted }: TaskCardProps) {
   const { finishToDo, handleRemove, changeCurrentId, currentId } = useToDoContext();
   const cardRef = useRef<HTMLDivElement | null>(null);
 
-  const hasFocus = currentId === id;
+  currentId !== id && cardRef.current?.setAttribute('class', 'task-card');
 
   const fadeOut = () => cardRef.current?.setAttribute('class', 'task-card fade-out');
 
@@ -31,10 +31,6 @@ export default function TaskCard({ id, title, description, isCompleted }: TaskCa
     changeCurrentId(id);
     cardRef.current?.setAttribute('class', 'task-card focus');
   }
-
-  useEffect(() => {
-    !hasFocus && cardRef.current?.setAttribute('class', 'task-card');
-  }, [hasFocus])
 
   return (
     <div key={id} ref={cardRef} className='task-card'>
@@ -56,4 +52,4 @@ export default function TaskCard({ id, title, description, isCompleted }: TaskCa
       <Info text={description} />
     </div>
   );
-}
+})
