@@ -6,5 +6,5 @@ interface InfoProps extends React.HTMLAttributes<HTMLParagraphElement> {
 }
 
 export default function Info({ text, ...props }: InfoProps) {
-  return <p  className='info'{...props}>{text}</p>;
+  return <p className='info'{...props}>{text}</p>;
 }
