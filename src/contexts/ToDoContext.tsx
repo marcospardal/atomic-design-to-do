@@ -1,3 +1,4 @@
+import { useLocalStorage } from '@hooks/index';
 import Task from '@/types/Task.types';
 import { TodoContextType } from '@/types/ToDoContext.types';
 import React, { createContext, ReactNode, useState, useCallback, useEffect } from 'react';
@@ -9,8 +10,9 @@ interface TodoProviderProps {
 }
 
 export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
+  const localStorage = useLocalStorage<Task[]>('todos');
   const [currentId, setCurrentId] = useState<number>(-1);
-  const [todos, setTodos] = useState<Task[]>(readLocalstorage());
+  const [todos, setTodos] = useState<Task[]>(localStorage.readData() || []);
 
   const onSubmit = useCallback((todo: Task) => {
     if (currentId !== -1) setTodos(prev => prev.map(e => e.id === currentId ? todo : e));
@@ -31,14 +33,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
     setTodos(prev => prev.filter(e => e.id !== todoId));
   }, []);
 
-  function readLocalstorage() {
-    const localStorageData = localStorage.getItem('todos');
-    return localStorageData ? JSON.parse(localStorageData) : [];
-  }
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+  useEffect(() => localStorage.update(todos), [todos, localStorage]);
 
   return (
     <TodoContext.Provider value={{ todos, currentId, onSubmit, finishToDo, changeCurrentId, handleRemove }}>
