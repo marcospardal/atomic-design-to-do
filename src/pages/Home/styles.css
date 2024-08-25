@@ -54,7 +54,6 @@
 @media (max-width: 500px) {
   .home-container {
     flex-direction: column-reverse;
-    padding-top: 20px;
   }
 
   .main {
@@ -64,6 +63,13 @@
   .fade-in {
     width: auto;
     overflow: auto;
+    padding-top: 0px;
+  }
+
+  .fade-in.show {
+    display: block;
+    flex: 0.5;
+    padding-top: 20px;
   }
 
   .main.transition {
