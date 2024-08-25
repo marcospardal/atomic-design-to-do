@@ -18,12 +18,12 @@ export default function Home() {
   useEffect(() => setShowClosed(openClosed), [openClosed]);
 
   return (
-    <div className="App">
+    <div className="home-container">
       <div className={`main ${showClosed ? 'transition' : ''}`}>
         <Header
           title='Atomic To-Do'
           headerOptions={
-            <Button color="transparent" onClick={() => setShowClosed(!showClosed)}>
+            <Button style={{ width: 60 }} color="transparent" onClick={() => setShowClosed(!showClosed)}>
               <img className={`toggle-closed-task ${showClosed ? 'rotate' : ''}`} id='toggle-closed-task' src={IconArrow} alt='toggle-closed-task' />
             </Button>
           }

@@ -1,5 +1,3 @@
-@import '../../../../colors.css';
-
 .input {
   border: 1px solid var(--background-color);
   outline: none;

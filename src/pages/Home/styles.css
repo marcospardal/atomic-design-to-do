@@ -1,3 +1,14 @@
+@import '../../css/breakpoints.css';
+
+.home-container {
+  text-align: center;
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
 
 .main {
   flex: 1;
@@ -20,6 +31,7 @@
   flex: 0;
   transition: 0.3s ease-in-out;
   width: 0;
+  height: 0;
   padding-top: 20px;
 }
 
@@ -37,4 +49,35 @@
 
 .toggle-closed-task.rotate {
   transform: rotate(-180deg);
+}
+
+@media (max-width: 500px) {
+  .home-container {
+    flex-direction: column-reverse;
+    padding-top: 20px;
+  }
+
+  .main {
+    height: 100vh;
+  }
+
+  .fade-in {
+    width: auto;
+    overflow: auto;
+  }
+
+  .main.transition {
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 0;
+    height: 50%;
+  }
+
+  .toggle-closed-task {
+    transform: rotate(-90deg);
+  }
+
+  .toggle-closed-task.rotate {
+    transform: rotate(90deg);
+  }
 }
