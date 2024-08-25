@@ -2,7 +2,7 @@ import { Label, Button } from '@atoms/index';
 import Card from "@molecules/Card";
 import Task from "@/types/Task.types";
 import './styles.css';
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
 import EditIcon from '@icons/edit.svg';
 import RemoveIcon from '@icons/remove.svg';
@@ -22,11 +22,9 @@ export default function ListingToDo({ title, id, display = 'grid', listType = 'o
   const { finishToDo, handleRemove, changeCurrentId, currentId, todos } = useToDoContext();
   const [fadeOutId, setFadeOutId] = useState<number>();
 
-  const data = useMemo(() => {
-    return todos.filter(e => listType === 'open' ? !e.isCompleted : e.isCompleted)
-  }, [todos])
+  const data = todos.filter(e => listType === 'open' ? !e.isCompleted : e.isCompleted)
 
-  function handleClickOption(id: number, option: 'remove' | 'finish') {
+  const handleClickOption = useCallback((id: number, option = 'finish' || 'remove') => {
     setFadeOutId(id);
 
     setTimeout(() => {
@@ -35,17 +33,13 @@ export default function ListingToDo({ title, id, display = 'grid', listType = 'o
 
       setFadeOutId(undefined);
     }, 400);
-  }
-
-  function setEdit(id: number) {
-    changeCurrentId(id);
-  }
+  }, [handleRemove, finishToDo]);
 
   const options = useCallback((todo: Task) => {
     const itemsOptionsType = {
       'open':
         <div>
-          <Button disabled={currentId === todo.id} color='transparent' onClick={() => setEdit(todo.id)}>
+          <Button disabled={currentId === todo.id} color='transparent' onClick={() => changeCurrentId(todo.id)}>
             <img src={EditIcon} alt='edit-todo' style={{ height: 15, width: 15 }} />
           </Button>
           <input type='checkbox' disabled={currentId === todo.id} onClick={() => handleClickOption(todo.id, 'finish')} />
@@ -57,18 +51,18 @@ export default function ListingToDo({ title, id, display = 'grid', listType = 'o
     };
 
     return itemsOptionsType[listType];
-  }, [listType, currentId]);
+  }, [listType, currentId, changeCurrentId, handleClickOption]);
 
   return (
     <>
       <Label label={title} />
       <section id={id} className={`container ${display}`}>
-        {data.map(todo => 
+        {data.map(todo =>
           <Card
             key={todo.id}
-            fadeOut={todo.id === fadeOutId} 
-            highlight={currentId === todo.id} 
-            options={options(todo)} 
+            fadeOut={todo.id === fadeOutId}
+            highlight={currentId === todo.id}
+            options={options(todo)}
             {...todo}
           />
         )}
