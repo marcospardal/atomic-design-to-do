@@ -10,7 +10,7 @@ interface TodoProviderProps {
 
 export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
   const [currentId, setCurrentId] = useState<number>(-1);
-  const [todos, setTodos] = useState<Task[]>([]);
+  const [todos, setTodos] = useState<Task[]>(readLocalstorage());
 
   const onSubmit = useCallback((todo: Task) => {
     if (currentId !== -1) setTodos(prev => prev.map(e => e.id === currentId ? todo : e));
@@ -31,14 +31,14 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
     setTodos(prev => prev.filter(e => e.id !== todoId));
   }, []);
 
-  useEffect(() => {
-    todos.length && localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+  function readLocalstorage() {
+    const localStorageData = localStorage.getItem('todos');
+    return localStorageData ? JSON.parse(localStorageData) : [];
+  }
 
   useEffect(() => {
-    const localStorageData = localStorage.getItem('todos');
-    localStorageData && setTodos(JSON.parse(localStorageData));
-  }, []);
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <TodoContext.Provider value={{ todos, currentId, onSubmit, finishToDo, changeCurrentId, handleRemove }}>
