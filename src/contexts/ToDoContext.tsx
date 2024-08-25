@@ -13,8 +13,11 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
   const [todos, setTodos] = useState<Task[]>([]);
 
   const onSubmit = useCallback((todo: Task) => {
-    setTodos(prev => [...prev, {...todo, id: todos.length}]);
-  }, [todos]);
+    if (currentId !== -1) setTodos(prev => prev.map(e => e.id === currentId ? todo : e));
+    else setTodos(prev => [...prev, { ...todo, id: todos.length }]);
+
+    setCurrentId(-1);
+  }, [todos, currentId]);
 
   const finishToDo = useCallback((toDoId: number) => {
     setTodos(prev => prev.map(item => item.id === toDoId ? { ...item, isCompleted: true } : item));
@@ -24,8 +27,12 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
     setCurrentId(toDoId);
   }, []);
 
+  const handleRemove = useCallback((todoId: number) => {
+    setTodos(prev => prev.filter(e => e.id !== todoId));
+  }, []);
+
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
+    localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
@@ -33,12 +40,12 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
       const localStorageData = localStorage.getItem('todos');
       localStorageData && setTodos(JSON.parse(localStorageData));
     } catch {
-      console.warn('No tasks saved on memory')
+      console.warn('No tasks saved on memory');
     }
-  }, [])
+  }, []);
 
   return (
-    <TodoContext.Provider value={{ todos, currentId, onSubmit, finishToDo, changeCurrentId }}>
+    <TodoContext.Provider value={{ todos, currentId, onSubmit, finishToDo, changeCurrentId, handleRemove }}>
       {children}
     </TodoContext.Provider>
   );

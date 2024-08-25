@@ -6,4 +6,5 @@ export interface TodoContextType {
   onSubmit: (todo: Task) => void;
   finishToDo: (todoId: number) => void;
   changeCurrentId: (todoId: number) => void;
+  handleRemove: (todoId: number) => void;
 }
