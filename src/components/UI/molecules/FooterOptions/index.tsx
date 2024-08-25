@@ -2,11 +2,11 @@ import React from 'react';
 import './styles.css';
 import Button, { ButtonProps } from '@atoms/Button';
 
-interface FormFooterProps {
+interface FooterOptionsProps {
   options: ButtonProps[]
 }
 
-export default function FormFooter({ options }: FormFooterProps) {
+export default function FooterOptions({ options }: FooterOptionsProps) {
   return (
     <div className='footer'>
       {options.map((optionProps, i) => <Button key={i} {...optionProps}/>)}

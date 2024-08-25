@@ -2,7 +2,6 @@
   max-width: 100%;
   background-color: var(--card);
   display: flex;
-  padding: 10px 15px;
   border-radius: 10px;
   flex-direction: column;
   transition: 0.3s ease-in-out;
@@ -11,11 +10,14 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   min-height: 70px;
+  opacity: 0;
 }
 
 .task-card.fade-in {
   opacity: 1;
   transform: scale(1.0);
+  width: auto;
+  padding: 10px 15px;
 }
 
 .task-card.fade-out {

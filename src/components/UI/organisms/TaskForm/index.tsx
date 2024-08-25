@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Task from '@/types/Task.types';
 import { useToDoContext } from '@hooks/index';
-import { FormField, FormFooter } from '@molecules/index';
+import { FormField, FooterOptions } from '@molecules/index';
 
 const emptyTask: Task = {
   description: '',
@@ -50,7 +50,7 @@ export default function Form() {
         name='description'
         placeholder='Insert the task description...'
       />
-      <FormFooter options={[
+      <FooterOptions options={[
         {
           children: 'Cancel',
           onClick: () => changeCurrentId(-1),
