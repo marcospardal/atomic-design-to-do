@@ -9,9 +9,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   onClick?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
-export default function Button({ children, color = 'primary', onClick }: ButtonProps) {
+export default function Button({ children, color = 'primary', onClick, ...props }: ButtonProps) {
   return (
-    <button className={`button ${color}`} onClick={onClick}>
+    <button className={`button ${color}`} onClick={onClick} {...props}>
       {children}
     </button>
   );
