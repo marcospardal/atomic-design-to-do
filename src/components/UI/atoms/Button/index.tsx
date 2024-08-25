@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './styles.css';
 
-type ButtonType = "primary" | "secondary";
+type ButtonType = "primary" | "secondary" | "transparent";
 
-export interface ButtonProps {
-  text: string;
-  type?: ButtonType;
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  color?: ButtonType;
   onClick?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
-export default function Button({ text, type = 'primary', onClick }: ButtonProps) {
+export default function Button({ children, color = 'primary', onClick }: ButtonProps) {
   return (
-    <button className={`button ${type}`} onClick={onClick}>
-      {text}
+    <button className={`button ${color}`} onClick={onClick}>
+      {children}
     </button>
   );
 }
