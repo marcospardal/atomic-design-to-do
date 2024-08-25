@@ -30,7 +30,7 @@ export default function Form() {
     }
 
     const editTodo = todos.find(todo => todo.id === currentId);
-    editTodo && setTask(editTodo);
+    if (editTodo) setTask(editTodo);
   }, [currentId, todos]);
 
   return (

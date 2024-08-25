@@ -28,6 +28,7 @@
 .task-card.focus {
   opacity: 1;
   background-color: var(--border);
+  padding: 10px 15px;
 }
 
 .task-card-header {

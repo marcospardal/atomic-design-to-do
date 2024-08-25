@@ -17,13 +17,12 @@ export default memo(function Card({ title, description, highlight, options, fade
   }
 
   useEffect(() => {
-    highlight && setCardClassName('focus');
-    fadeOut && setCardClassName('fade-out');
+    setCardClassName('fade-in');
+    if (highlight) setCardClassName('focus');
+    if (fadeOut) setCardClassName('fade-out');
+
   }, [highlight, fadeOut]);
 
-  useEffect(() => {
-    setCardClassName('fade-in');
-  }, [])
 
   return (
     <div ref={cardRef} className='task-card'>
