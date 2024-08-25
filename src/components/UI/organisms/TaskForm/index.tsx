@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
-import { FormField, FormFooter } from '../../molecules';
 import Task from '@/types/Task.types';
-import { useToDoContext } from '../../../../hooks';
+import { useToDoContext } from '@hooks/index';
+import { FormField, FormFooter } from '@molecules/index';
 
 const emptyTask: Task = {
   description: '',
@@ -52,17 +52,17 @@ export default function Form() {
       />
       <FormFooter options={[
         {
-          text: 'Cancel',
+          children: 'Cancel',
           onClick: () => changeCurrentId(-1),
-          type: 'secondary'
+          color: 'secondary'
         },
         {
-          text: 'Save',
+          children: currentId !== -1 ? 'Edit' : 'Save',
           onClick: () => {
             onSubmit(task);
             setTask(emptyTask);
           },
-          type: 'primary'
+          color: 'primary'
         }
       ]} />
     </section>
