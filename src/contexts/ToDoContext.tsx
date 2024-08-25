@@ -1,6 +1,6 @@
 import Task from '@/types/Task.types';
 import { TodoContextType } from '@/types/ToDoContext.types';
-import React, { createContext, ReactNode, useContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, ReactNode, useState, useCallback, useEffect } from 'react';
 
 export const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
@@ -32,16 +32,12 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
+    todos.length && localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
-    try {
-      const localStorageData = localStorage.getItem('todos');
-      localStorageData && setTodos(JSON.parse(localStorageData));
-    } catch {
-      console.warn('No tasks saved on memory');
-    }
+    const localStorageData = localStorage.getItem('todos');
+    localStorageData && setTodos(JSON.parse(localStorageData));
   }, []);
 
   return (
