@@ -26,19 +26,21 @@ export default function ListingToDo({ title, id, display = 'grid', listType = 'o
     return todos.filter(e => listType === 'open' ? !e.isCompleted : e.isCompleted)
   }, [todos])
 
-  function handleFinish(id: number) {
+  function handleClickOption(id: number, option: 'remove' | 'finish') {
     setFadeOutId(id);
-    setTimeout(() => {
-      finishToDo(id);
-      setFadeOutId(undefined)
-    }, 400);
-  }
 
-  function handleRemoveTodo(id: number) {
-    setFadeOutId(id);
     setTimeout(() => {
-      handleRemove(id)
-      setFadeOutId(undefined)
+      switch (option) {
+        case 'finish': {
+          finishToDo(id);
+          break;
+        }
+        case 'remove': {
+          handleRemove(id);
+          break;
+        }
+      }
+      setFadeOutId(undefined);
     }, 400);
   }
 
@@ -53,10 +55,10 @@ export default function ListingToDo({ title, id, display = 'grid', listType = 'o
           <Button disabled={currentId === todo.id} color='transparent' onClick={() => setEdit(todo.id)}>
             <img src={EditIcon} alt='edit-todo' style={{ height: 15, width: 15 }} />
           </Button>
-          <input type='checkbox' disabled={currentId === todo.id} onClick={() => handleFinish(todo.id)} />
+          <input type='checkbox' disabled={currentId === todo.id} onClick={() => handleClickOption(todo.id, 'finish')} />
         </div>,
       'closed':
-        <Button color='transparent' onClick={() => handleRemoveTodo(todo.id)}>
+        <Button color='transparent' onClick={() => handleClickOption(todo.id, 'remove')}>
           <img src={RemoveIcon} alt='remove-todo' />
         </Button>
     };
