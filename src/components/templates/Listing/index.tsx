@@ -30,16 +30,9 @@ export default function ListingToDo({ title, id, display = 'grid', listType = 'o
     setFadeOutId(id);
 
     setTimeout(() => {
-      switch (option) {
-        case 'finish': {
-          finishToDo(id);
-          break;
-        }
-        case 'remove': {
-          handleRemove(id);
-          break;
-        }
-      }
+      if (option === 'finish') finishToDo(id);
+      else handleRemove(id);
+
       setFadeOutId(undefined);
     }, 400);
   }
