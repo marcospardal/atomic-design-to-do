@@ -1,7 +1,8 @@
 import React from 'react';
-import Form from '../../components/UI/organisms/TaskForm';
-import { useToDoContext } from '../../hooks';
+import { useToDoContext } from '@hooks/index';
 import Listing from '../../templates/Listing';
+import { Header, TaskForm } from '@organisms/index';
+
 import './styles.css';
 
 export default function Home() {
@@ -13,10 +14,11 @@ export default function Home() {
   return (
     <div className="App">
       <div className='main'>
-        <Form />
+        <Header />
+        <TaskForm />
         <Listing title='Tasks' id='tasks' data={openTasks} />
       </div>
-      <div className={`fade-in ${closedTasks.length ? 'show' : ''}`} style={{ flex: closedTasks.length ? 1 : 0 }}>
+      <div className={`fade-in ${closedTasks.length ? 'show' : ''}`}>
         <Listing title='Finished Tasks' id='closed-tasks' display='list' data={closedTasks} />
       </div>
     </div>
