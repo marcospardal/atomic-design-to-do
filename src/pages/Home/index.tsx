@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useToDoContext } from '@hooks/index';
-import Listing from '../../templates/Listing';
+import ListingToDo from '@templates/Listing'
 import { Button } from "@atoms/index";
 import IconArrow from '@icons/arrow.svg';
 import { Header, TaskForm } from '@organisms/index';
@@ -11,9 +11,7 @@ export default function Home() {
   const { todos } = useToDoContext();
   const [showClosed, setShowClosed] = useState<boolean>(false);
 
-  const openTasks = todos.filter(e => !e.isCompleted);
-  const closedTasks = todos.filter(e => e.isCompleted);
-  const openClosed = closedTasks.length > 0;
+  const openClosed = todos.filter(e => e.isCompleted).length > 0;
 
   useEffect(() => setShowClosed(openClosed), [openClosed]);
 
@@ -29,10 +27,10 @@ export default function Home() {
           }
         />
         <TaskForm />
-        <Listing title='Tasks' id='tasks' data={openTasks} />
+        <ListingToDo title='Tasks' id='tasks'  />
       </div>
       <div className={`fade-in ${showClosed ? 'show' : ''}`}>
-        <Listing title='Finished Tasks' id='closed-tasks' display='list' data={closedTasks} />
+        <ListingToDo listType='closed' title='Finished Tasks' id='closed-tasks' display='list' />
       </div>
     </div>
   );

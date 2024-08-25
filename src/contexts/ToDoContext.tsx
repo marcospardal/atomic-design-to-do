@@ -14,7 +14,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
 
   const onSubmit = useCallback((todo: Task) => {
     if (currentId !== -1) setTodos(prev => prev.map(e => e.id === currentId ? todo : e));
-    else setTodos(prev => [...prev, { ...todo, id: todos.length }]);
+    else setTodos(prev => [...prev, { ...todo, id: new Date().getMilliseconds() }]);
 
     setCurrentId(-1);
   }, [todos, currentId]);

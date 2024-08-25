@@ -24,6 +24,7 @@
       "@atoms/*": ["./src/components/UI/atoms/*"],
       "@molecules/*": ["./src/components/UI/molecules/*"],
       "@organisms/*": ["./src/components/UI/organisms/*"],
+      "@templates/*": ["./src/components/templates/*"],
       "@icons/*": ["./src/static/icons/*"],
       "@hooks/*": ["./src/hooks/*"]
     },
