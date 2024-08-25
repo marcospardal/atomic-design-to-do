@@ -1,3 +1,3 @@
 export { default as FormField } from './FormField';
-export { default as FooterOptions } from './FooterOptions';
+export { default as ButtonOptions } from './ButtonOptions';
 export { default as Card } from './Card';

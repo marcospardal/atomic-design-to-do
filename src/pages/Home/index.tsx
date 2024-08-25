@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useToDoContext } from '@hooks/index';
 import ListingToDo from '@organisms/ListingToDo';
-import { Button } from "@atoms/index";
 import IconArrow from '@icons/arrow.svg';
 import { TaskForm } from '@organisms/index';
 
@@ -21,11 +20,13 @@ export default function Home() {
       <DefaultPage 
         title='Atomic To-Do' 
         className={`main ${showClosed ? 'transition' : ''}`}
-        headerOptions={
-          <Button style={{ width: 60 }} color="transparent" onClick={() => setShowClosed(!showClosed)}>
-            <img className={`toggle-closed-task ${showClosed ? 'rotate' : ''}`} id='toggle-closed-task' src={IconArrow} alt='toggle-closed-task' />
-          </Button>
-        }
+        headerOptions={[
+          {
+            children: <img className={`toggle-closed-task ${showClosed ? 'rotate' : ''}`} id='toggle-closed-task' src={IconArrow} alt='toggle-closed-task' />,
+            color: 'transparent',
+            onClick: () => setShowClosed(!showClosed)
+          }
+        ]}
       >
         <TaskForm />
         <ListingToDo title='Tasks' id='tasks' />

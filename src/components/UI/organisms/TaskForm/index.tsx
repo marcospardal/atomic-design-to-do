@@ -2,14 +2,14 @@ import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Task from '@/types/Task.types';
 import { useToDoContext } from '@hooks/index';
-import { FormField, FooterOptions } from '@molecules/index';
+import { FormField, ButtonOptions } from '@molecules/index';
 
 const emptyTask: Task = {
   description: '',
   id: 0,
   isCompleted: false,
   title: ''
-}
+};
 
 export default function Form() {
   const { todos, currentId, onSubmit, changeCurrentId } = useToDoContext();
@@ -50,23 +50,25 @@ export default function Form() {
         name='description'
         placeholder='Insert the task description...'
       />
-      <FooterOptions options={[
-        {
-          children: 'Cancel',
-          onClick: () => changeCurrentId(-1),
-          color: 'secondary',
-          disabled: currentId === -1
-        },
-        {
-          children: currentId !== -1 ? 'Edit' : 'Save',
-          onClick: () => {
-            onSubmit(task);
-            setTask(emptyTask);
+      <ButtonOptions
+        options={[
+          {
+            children: 'Cancel',
+            onClick: () => changeCurrentId(-1),
+            color: 'secondary',
+            disabled: currentId === -1
           },
-          disabled: !task.title || !task.description,
-          color: 'primary'
-        }
-      ]} />
+          {
+            children: currentId !== -1 ? 'Edit' : 'Save',
+            onClick: () => {
+              onSubmit(task);
+              setTask(emptyTask);
+            },
+            disabled: !task.title || !task.description,
+            color: 'primary'
+          }
+        ]} 
+      />
     </section>
   );
 }
