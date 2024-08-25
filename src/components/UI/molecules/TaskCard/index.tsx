@@ -45,7 +45,7 @@ export default function TaskCard({ id, title, description, isCompleted }: TaskCa
             <Button disabled={currentId === id} color='transparent' onClick={setEdit}>
               <img src={EditIcon} alt='edit-todo' style={{ height: 15, width: 15 }}/>
             </Button>
-            <input type='checkbox' disabled={isCompleted} onClick={handleFinish} />
+            <input type='checkbox' disabled={isCompleted || currentId === id} onClick={handleFinish} />
           </div>}
         {isCompleted && 
           <Button color='transparent' onClick={handleRemoveTodo}>

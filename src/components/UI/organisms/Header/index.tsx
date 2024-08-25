@@ -1,21 +1,23 @@
-import React from "react";
-import { Button, Label } from "@atoms/index";
+import React, { ReactNode } from "react";
+import { Label } from "@atoms/index";
 
-import IconArrow from '@icons/arrow.svg';
 import Logo from '@icons/logo.svg';
 
 import './styles.css';
 
-export default function Header() {
+interface HeaderProps {
+  title: string;
+  headerOptions: ReactNode;
+}
+
+export default function Header({ title, headerOptions }: HeaderProps) {
   return (
     <section id='header'>
       <div>
         <img id='logo' alt='logo' src={Logo} />
-        <Label label="Atomic To-Do" className='title' />
+        <Label label={title} className='title' />
       </div>
-      <Button color="transparent">
-        <img id='toggle-closed-task' src={IconArrow} alt='toggle-closed-task' />
-      </Button>
+      {headerOptions}
     </section>
   );
 }

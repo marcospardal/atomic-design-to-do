@@ -19,11 +19,6 @@
   margin-right: 10px;
 }
 
-#toggle-closed-task {
-  height: 40px;
-  width: 40px;
-}
-
 @keyframes scaleUp {
   0% {
     transform: scale(1);

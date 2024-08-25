@@ -1,10 +1,40 @@
+
+.main {
+  flex: 1;
+  background: var(--white);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
+}
+
+.main.transition {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
 .fade-in {
   opacity: 0;
   flex: 0;
   transition: 0.3s ease-in-out;
+  width: 0;
+  padding-top: 20px;
 }
 
 .fade-in.show {
   opacity: 1;
-  flex: 1
+  flex: 0.5;
+}
+
+.toggle-closed-task {
+  height: 40px;
+  width: 40px;
+  transition: 0.3s ease-in-out;
+  transform: rotate(0deg);
+}
+
+.toggle-closed-task.rotate {
+  transform: rotate(-180deg);
 }

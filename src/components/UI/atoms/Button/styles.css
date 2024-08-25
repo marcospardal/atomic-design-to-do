@@ -28,3 +28,7 @@
 .transparent {
   background: transparent;
 }
+
+.button:disabled {
+  opacity: 0.5;
+}

@@ -31,19 +31,19 @@ export default function Form() {
 
     const editTodo = todos.find(todo => todo.id === currentId);
     editTodo && setTask(editTodo);
-  }, [currentId]);
+  }, [currentId, todos]);
 
   return (
     <section id='task-form' className='form'>
       <FormField
-        label='Task Title'
+        label='Title'
         onChange={handleChange}
         value={task.title}
         name='title'
         placeholder='Insert the task title...'
       />
       <FormField
-        label='Task Description'
+        label='Description'
         type='textarea'
         onChange={handleChange}
         value={task.description}
@@ -54,7 +54,8 @@ export default function Form() {
         {
           children: 'Cancel',
           onClick: () => changeCurrentId(-1),
-          color: 'secondary'
+          color: 'secondary',
+          disabled: currentId === -1
         },
         {
           children: currentId !== -1 ? 'Edit' : 'Save',
@@ -62,6 +63,7 @@ export default function Form() {
             onSubmit(task);
             setTask(emptyTask);
           },
+          disabled: !task.title || !task.description,
           color: 'primary'
         }
       ]} />
