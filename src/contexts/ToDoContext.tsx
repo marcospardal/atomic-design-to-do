@@ -17,7 +17,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
     else setTodos(prev => [...prev, { ...todo, id: new Date().getMilliseconds() }]);
 
     setCurrentId(-1);
-  }, [todos, currentId]);
+  }, [currentId]);
 
   const finishToDo = useCallback((toDoId: number) => {
     setTodos(prev => prev.map(item => item.id === toDoId ? { ...item, isCompleted: true } : item));
