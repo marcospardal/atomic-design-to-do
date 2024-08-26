@@ -48,12 +48,10 @@ The To-Do list state and functions were created in a separated context, that inv
 - [useToDoContext](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/hooks/index.ts) - custom hook that allows the developer to use information and functions that are in the To Do Context.
 
 ## Application
+
 ### Desktop
 ![Atomic-To-Do-Google-Chrome-2024-08-25-21-54-05](https://github.com/user-attachments/assets/1d863bb6-0619-45cf-95ef-1cc45bc5fca2)
 
 ### Mobile
-
-
-
-https://github.com/user-attachments/assets/7e2a6fa4-502e-4acc-87e8-c65ab52b56c2
+![Atomic-To-Do-Google-Chrome-2024-08-25-22-00-29](https://github.com/user-attachments/assets/c4e41ccc-a59e-4207-bb9e-5607712c3fda)
 
