@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# Atomic Design - To-Do List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://github.com/user-attachments/assets/05dc5f3a-55e8-4fa2-b1c1-a25e1c6d62a8)
+## Project Overview
 
-## Available Scripts
+This project was build following the atomic design principles. Atomic Desgin is a design pattern based on chemistry, where each interface component (atoms) is combined to create different blocks of the system. This design is focused in flexibility and consistency.
 
-In the project directory, you can run:
+## Components
 
-### `npm start`
+### Atoms
+Atoms are the most basic elements of the website, they usually have only one function and are very simple.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Button](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/atoms/Button/index.tsx) - Simple styled button component
+- [Input](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/atoms/Input/index.tsx) - Simple styled text input;
+- [Info](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/atoms/Info/index.tsx) - Paragraph;
+- [Label](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/atoms/Label/index.tsx) - Simple styled label.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Molecules
+Molecules combine atoms to create functional unitys, they express a basic funcionality that can be reused inside the project.
 
-### `npm test`
+- [Button Options](https://github.com/marcospardal/atomic-design-to-do/tree/main/src/components/UI/molecules/ButtonOptions) - Display a list of buttons;
+- [Card](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/molecules/Card/index.tsx) - Display a card with title and description and button options if passed as props;
+- [Form Field](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/molecules/FormField/index.tsx) - Show a styled input with a label.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Organisms
+Organisms combine molecules to create entire sections of the interface.
 
-### `npm run build`
+- [Header](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/organisms/Header/index.tsx) - Display the app logo, page title, and show options if passed;
+- [Listing To Do](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/organisms/ListingToDo/index.tsx) - Display a list of to-dos, using the Card molecule;
+- [Task Form](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/UI/organisms/TaskForm/index.tsx) - Form to add a new To-Do.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Templates
+Templates combine organisms to create a layout that can be reused through the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Default Page](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/components/templates/DefaultPage/index.tsx) - Render the page content with a Header on top;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Pages
+Pages use templates or organisms to create the final interface.
 
-### `npm run eject`
+- [Home Page](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/pages/Home/index.tsx) - Display the default Form to add new To-Dos and List of open and closed To-Dos
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Context
+The To-Do list state and functions were created in a separated context, that surrounds the application, avoiding the need to pass all the functions and current state as props to inner components.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Hooks
+- [useLocalStorage](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/hooks/index.ts) - custom hook that allows the developer to update and read data from the localStorage based on the key;
+- [useToDoContext](https://github.com/marcospardal/atomic-design-to-do/blob/main/src/hooks/index.ts) - custom hook that allows the developer to use information and functions that are in the To Do Context.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
